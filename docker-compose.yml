@@ -1,0 +1,65 @@
+version: '3.1'
+
+services:
+  db:
+    image: whalemichael/alinedb:1.0
+    ports:
+      - 8000:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+  
+  underwriter-microservice:
+    image: underwriter_test:1.0
+    depends_on:
+      - db
+    restart: on-failure
+    environment:
+      - APP_PORT=8001
+    ports:
+      - 8001:8001
+    expose:
+      - 8001
+    env_file:
+      - ./var.env
+  
+  bank-microservice:
+    image: bank_test:1.0
+    depends_on:
+      - db
+    restart: on-failure
+    environment:
+      - APP_PORT=8002
+    ports:
+      - 8002:8002
+    expose:
+      - 8002
+    env_file:
+      - ./var.env
+  
+  transaction-microservice:
+    image: transaction_test:1.0
+    depends_on:
+      - db
+    restart: on-failure
+    environment:
+      - APP_PORT=8003
+    ports:
+      - 8003:8003
+    expose:
+      - 8003
+    env_file:
+      - ./var.env
+  
+  user-microservice:
+    image: user_test:1.0
+    depends_on:
+      - db
+    restart: on-failure
+    environment:
+      - APP_PORT=8004
+    ports:
+      - 8004:8004
+    expose:
+      - 8004
+    env_file:
+      - ./var.env
