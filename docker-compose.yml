@@ -9,7 +9,7 @@ services:
       - MYSQL_ROOT_PASSWORD=password
   
   underwriter-microservice:
-    image: underwriter_test:1.0
+    image: whalemichael/underwriter-microservice:1.0
     depends_on:
       - db
     restart: on-failure
@@ -23,7 +23,7 @@ services:
       - ./var.env
   
   bank-microservice:
-    image: bank_test:1.0
+    image: whalemichael/bank-microservice:1.0
     depends_on:
       - db
     restart: on-failure
@@ -37,7 +37,7 @@ services:
       - ./var.env
   
   transaction-microservice:
-    image: transaction_test:1.0
+    image: whalemichael/transaction-microservice:1.0
     depends_on:
       - db
     restart: on-failure
@@ -51,7 +51,7 @@ services:
       - ./var.env
   
   user-microservice:
-    image: user_test:1.0
+    image: whalemichael/user-microservice:1.0
     depends_on:
       - db
     restart: on-failure
